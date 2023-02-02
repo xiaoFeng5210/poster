@@ -1,3 +1,8 @@
+interface Options {
+  width: number;
+  height: number;
+}
+
 class Canvas {
   public width!: number;
   public height!: number;
@@ -16,13 +21,25 @@ class Canvas {
   /** 缓冲层画布环境 */
   public contextCache!: CanvasRenderingContext2D;
   /** 整个画布到上面和左边的偏移量 */
-  private _offset: any;
+  private _offset!: { top: number; left: number }
   /** 画布中所有添加的物体 */
   private _objects!: any[];
 
 
-  constructor(el: HTMLCanvasElement) {
+  constructor(el: HTMLCanvasElement, options: Options) {
+    this.width = options.width;
+    this.height = options.height;
+    this._initLowerCanvas(el);
 
+  }
+
+  protected _initLowerCanvas(el: HTMLCanvasElement) {
+    this.lowerCanvasEl = el;
+    this.contextContainer = this.lowerCanvasEl.getContext('2d') as CanvasRenderingContext2D;
+    this.lowerCanvasEl.width = this.width;
+    this.lowerCanvasEl.height = this.height;
+    this.lowerCanvasEl.style.width = this.width + 'px';
+    this.lowerCanvasEl.style.height = this.height + 'px';
   }
 }
 
