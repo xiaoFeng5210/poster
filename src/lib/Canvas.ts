@@ -1,0 +1,29 @@
+class Canvas {
+  public width!: number;
+  public height!: number;
+  /**包围canvas的外层容器 */
+  public wrapperEl!: HTMLElement;
+  /** 下层 canvas 画布，主要用于绘制所有物体 */
+  public lowerCanvasEl!: HTMLCanvasElement;
+  /** 上层 canvas，主要用于监听鼠标事件、涂鸦模式、左键点击拖蓝框选区域 */
+  public upperCanvasEl!: HTMLCanvasElement;
+  /** 缓冲层画布 */
+  public cacheCanvasEl!: HTMLCanvasElement;
+  /** 上层画布环境 */
+  public contextTop!: CanvasRenderingContext2D;
+  /** 下层画布环境 */
+  public contextContainer!: CanvasRenderingContext2D;
+  /** 缓冲层画布环境 */
+  public contextCache!: CanvasRenderingContext2D;
+  /** 整个画布到上面和左边的偏移量 */
+  private _offset: any;
+  /** 画布中所有添加的物体 */
+  private _objects!: any[];
+
+
+  constructor(el: HTMLCanvasElement) {
+
+  }
+}
+
+export default Canvas
