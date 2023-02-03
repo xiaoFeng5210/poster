@@ -14,6 +14,8 @@ export interface BaseClass {
   originX: string
   originY: string
   stateProperties: string[]
+  fill: boolean
+  stroke: boolean
 }
 
 export type BaseClassKey = keyof BaseClass
@@ -43,6 +45,8 @@ class FabricObject {
   public originX: string = 'left';
   /** 默认垂直变换中心 top | bottom | center */
   public originY: string = 'left';
+  public fill: boolean = false;
+  public stroke: boolean = true;
   /** 列举常用的属性 */
   public stateProperties: string[] = ('top left width height scaleX scaleY ' + 'angle fill originX originY ' + 'stroke strokeWidth ' + 'borderWidth visible').split(' ');
 
