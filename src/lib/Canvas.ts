@@ -1,3 +1,5 @@
+import { ObjectArg } from '~/types'
+
 interface Options {
   width: number;
   height: number;
@@ -22,8 +24,8 @@ class Canvas {
   public contextCache!: CanvasRenderingContext2D;
   /** 整个画布到上面和左边的偏移量 */
   private _offset!: { top: number; left: number }
-  /** 画布中所有添加的物体 */
-  private _objects!: any[];
+  /** 画布中所有添加的物体实例 */
+  private _objects: ObjectArg[] = [];
 
 
   constructor(el: HTMLCanvasElement, options: Options) {
@@ -40,6 +42,25 @@ class Canvas {
     this.lowerCanvasEl.height = this.height;
     this.lowerCanvasEl.style.width = this.width + 'px';
     this.lowerCanvasEl.style.height = this.height + 'px';
+  }
+  public add(...args: ObjectArg[]): Canvas {
+    this._objects.concat(...args);
+    this.renderAll()
+    return this
+  }
+
+  public renderAll(): Canvas {
+    const ctx = this.contextContainer; // 下层画布环境
+    this.clearContext(ctx);
+    this._objects.forEach(obj => {
+      obj.render(ctx)
+    })
+    return this
+  }
+
+  public clearContext(ctx: CanvasRenderingContext2D) {
+    ctx.clearRect(0, 0, this.width, this.height);
+    return this
   }
 }
 

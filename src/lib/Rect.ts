@@ -1,7 +1,7 @@
 import FabricObject, { BaseClass } from "./FabricObject";
 import Util from "./Utils";
 
-interface Options {
+export interface Options extends BaseClass {
   rx: number,
   ry: number
 }
@@ -12,9 +12,9 @@ class Rect extends FabricObject {
   public rx: number = 0;
   public ry: number = 0;
 
-  constructor(options: BaseClass) {
+  constructor(options: Options) {
     super(options);
-
+    this._initRxRy(options);
   }
 
   /** 一些共有的和独有的属性 */
