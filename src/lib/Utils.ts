@@ -6,7 +6,7 @@ class Util {
     return canvas;
   }
   /** 角度转弧度，注意 canvas 中用的都是弧度，但是角度对我们来说比较直观 */
-  static degreesToRadians(degrees: number): number {
+  static degressToRadians(degrees: number): number {
     return degrees * PiBy180;
   }
   /** 弧度转角度，注意 canvas 中用的都是弧度，但是角度对我们来说比较直观 */
