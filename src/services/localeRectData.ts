@@ -17,7 +17,7 @@ export function createRect(data?: Partial<RectOptions>): RectOptions {
     stateProperties: [],
     rx: 0,
     ry: 0,
-    fill: false,
+    fill: true,
     stroke: true,
     ...data,
   }

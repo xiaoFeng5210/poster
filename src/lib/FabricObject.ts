@@ -121,7 +121,7 @@ class FabricObject {
     ctx.rotate(Util.degressToRadians(this.angle))
     ctx.scale(this.scaleX, this.scaleY)
   }
-
+  // 父类先写一个方法放在这里，子类可以重写
   _render(ctx: CanvasRenderingContext2D) {
 
   }

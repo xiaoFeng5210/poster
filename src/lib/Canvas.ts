@@ -44,7 +44,8 @@ class Canvas {
     this.lowerCanvasEl.style.height = this.height + 'px';
   }
   public add(...args: ObjectArg[]): Canvas {
-    this._objects.concat(...args);
+    this._objects.push(...args);
+    console.log(this._objects)
     this.renderAll()
     return this
   }
@@ -53,6 +54,7 @@ class Canvas {
     const ctx = this.contextContainer; // 下层画布环境
     this.clearContext(ctx);
     this._objects.forEach(obj => {
+      console.log(obj)
       obj.render(ctx)
     })
     return this

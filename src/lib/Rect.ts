@@ -3,7 +3,8 @@ import Util from "./Utils";
 
 export interface Options extends BaseClass {
   rx: number,
-  ry: number
+  ry: number,
+  strokeStyle: string
 }
 
 class Rect extends FabricObject {
@@ -11,10 +12,11 @@ class Rect extends FabricObject {
   public type: string = "rect";
   public rx: number = 0;
   public ry: number = 0;
+  public strokeStyle: string = 'black'
 
   constructor(options: Options) {
     super(options);
-    this._initRxRy(options);
+    this._initRect(options);
   }
 
   /** 一些共有的和独有的属性 */
@@ -23,19 +25,21 @@ class Rect extends FabricObject {
   }
 
   /** 初始化圆角值 */
-  _initRxRy(options: Options) {
+  _initRect(options: Options) {
     this.rx = options.rx || 0;
     this.ry = options.ry || 0;
+    this.strokeStyle = options.strokeStyle || 'black'
   }
 
   _render(ctx: CanvasRenderingContext2D) {
+    console.log(ctx)
     let rx = this.rx || 0,
       ry = this.ry || 0,
       x = -this.width / 2,
       y = -this.height / 2,
       w = this.width,
       h = this.height;
-
+    ctx.strokeStyle = this.strokeStyle
     ctx.moveTo(x + rx, y);
     ctx.lineTo(x + w - rx, y);
     ctx.bezierCurveTo(x + w, y, x + w, y + ry, x + w, y + ry);
