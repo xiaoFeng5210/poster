@@ -15,14 +15,12 @@ function View() {
 
   useEffect(() => {
     if (_canvas) {
-      console.log('canvas初始化好')
     }
   }, [_canvas])
 
   function testDraw() {
     if (_canvas) {
-      const rect = createRect({ width: 500, height: 500 });
-      // console.log(new Rect(rect))
+      const rect = createRect({ top: 0, left: 0, width: 500, height: 500 });
       (_canvas as Canvas).add(new Rect(rect))
     }
   }
