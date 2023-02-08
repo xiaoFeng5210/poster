@@ -5,6 +5,7 @@ import { createRect } from '~/services'
 import '~/styles/view.scss'
 import Rect from '~/lib/Rect'
 import { Button } from '@arco-design/web-react'
+import { Tools } from '~/components'
 
 function View() {
   const [_canvas, setCanvas] = useCanvas2DStore(state => [state._canvas, state.setCanvas])
@@ -27,7 +28,8 @@ function View() {
   return (
     <div className='g_box'>
       <canvas id='lower_canvas' />
-      <Button className="position-absolute top-0 left-0" onClick={testDraw}>测试</Button>
+      {/* <Button className="position-absolute top-0 left-0" onClick={testDraw}>测试</Button> */}
+      <Tools />
     </div>
   )
 }

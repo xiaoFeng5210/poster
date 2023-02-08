@@ -1,0 +1,36 @@
+.tools_box {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+  position: absolute;
+  height: 54px;
+  padding: 4px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  box-shadow: 0px 0px 16px -1px rgba(0, 0, 0, 0.05), 0px 0px 16px -8px rgba(0, 0, 0, 0.05), 0px 0px 16px -12px rgba(0, 0, 0, 0.12), 0px 0px 2px 0px rgba(0, 0, 0, 0.08);
+  .tool {
+    // padding: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 5px;
+    &:hover {
+      background-color: rgb(211, 209, 209);
+      color: white;
+    }
+    .tool_item {
+      &:hover {
+        color: white
+      }
+    }
+  }
+  .bg_tool_blue {
+    background-color: rgba(66, 133, 244, 1);
+  }
+  .bg_tool_white {
+    background-color: white;
+  }
+}
