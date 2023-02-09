@@ -14,18 +14,11 @@ function View() {
     setCanvas(canvas)
   }, []);
 
-  function addRect() {
-    if (_canvas) {
-      const rect = createRect({ ...randomPosition(_canvas), width: 100, height: 100 });
-      (_canvas as Canvas).add(new Rect(rect))
-    }
-  }
-
   return (
     <div className='g_box'>
       <canvas id='lower_canvas' />
       {/* <Button className="position-absolute top-0 left-0" onClick={testDraw}>测试</Button> */}
-      <Tools addRect={addRect} />
+      <Tools />
     </div>
   )
 }

@@ -1,15 +1,12 @@
 import 'styles/tools.scss'
 import { useState } from 'react'
+import { useCanvas2DStore } from '~/store/canvasStore'
+import { ToolsEnum } from '~/services'
 
 interface Props {
   addRect: () => void
 }
-enum ToolsEnum {
-  Pencil = 'pencil',
-  Crop = 'crop',
-  Rect = 'rect',
-  Circle = 'circle'
-}
+
 type ToolItem = {
   type: ToolsEnum,
   icon: string,
@@ -35,8 +32,8 @@ const toolsOption = [
   }
 ]
 
-export function Tools(props: Props) {
-  const { addRect } = props
+export function Tools() {
+  const addObject = useCanvas2DStore(state => state.addObject)
   const [toolsOptions, setToolsOptions] = useState<ToolItem[]>(toolsOption)
   const handleSelectTool = (tool: ToolsEnum) => {
     setToolsOptions(toolsOptions.map(item => {
@@ -44,7 +41,7 @@ export function Tools(props: Props) {
         item.active = true;
         item.color = 'color-white';
         item.bgColor = 'bg_tool_blue';
-        if (item.type === 'rect') addRect();
+        addObject(tool)
       } else {
         item.active = false;
         item.color = 'color-black';
