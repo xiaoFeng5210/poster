@@ -1,7 +1,9 @@
 import 'styles/tools.scss'
 import { useState } from 'react'
 
-// type Tools = 'pencil' | 'crop' | 'rect' | 'circle'
+interface Props {
+  addRect: () => void
+}
 enum ToolsEnum {
   Pencil = 'pencil',
   Crop = 'crop',
@@ -33,7 +35,8 @@ const toolsOption = [
   }
 ]
 
-export function Tools() {
+export function Tools(props: Props) {
+  const { addRect } = props
   const [toolsOptions, setToolsOptions] = useState<ToolItem[]>(toolsOption)
   const handleSelectTool = (tool: ToolsEnum) => {
     setToolsOptions(toolsOptions.map(item => {
@@ -41,6 +44,7 @@ export function Tools() {
         item.active = true;
         item.color = 'color-white';
         item.bgColor = 'bg_tool_blue';
+        if (item.type === 'rect') addRect();
       } else {
         item.active = false;
         item.color = 'color-black';
@@ -54,7 +58,7 @@ export function Tools() {
       {
         toolsOption.map((tool, index) => {
           return (
-            <div className={['tool'].join(' ')} onClick={() => handleSelectTool(tool.type)}>
+            <div key={index} className={['tool', tool.bgColor].join(' ')} onClick={() => handleSelectTool(tool.type)}>
               <span className={['tool_item', 'w-100%', 'h-100%', tool.color, tool.icon].join(' ')}></span>
             </div>
           )

@@ -19,17 +19,18 @@ function View() {
     }
   }, [_canvas])
 
-  function testDraw() {
+  function addRect() {
     if (_canvas) {
       const rect = createRect({ top: 0, left: 0, width: 500, height: 500 });
       (_canvas as Canvas).add(new Rect(rect))
     }
   }
+
   return (
     <div className='g_box'>
       <canvas id='lower_canvas' />
       {/* <Button className="position-absolute top-0 left-0" onClick={testDraw}>测试</Button> */}
-      <Tools />
+      <Tools addRect={addRect} />
     </div>
   )
 }

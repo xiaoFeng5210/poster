@@ -14,5 +14,5 @@ export const useCanvas2DStore = create<State & Action>((set, get) => ({
   _canvas: {},
 
   setCanvas: (canvas: Canvas) => set(() => ({ _canvas: canvas })),
-  setCanvasItem: (newVal: Partial<Canvas>) => set(state => ({ _canvas: { ...state._canvas, ...newVal } }))
+  setCanvasItem: (newVal: Partial<Canvas>) => set(state => ({ _canvas: { ...state._canvas, ...newVal } })),
 }))
