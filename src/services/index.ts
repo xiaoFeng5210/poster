@@ -1,6 +1,7 @@
 export { createRect } from "./localeRectData"
 export { randomPosition } from "./utils";
-export { ToolsEnum } from "./tool";
+export { ToolsEnum, toolsOption } from "./tool";
+export type { ToolItem } from './tool'
 
 
 
