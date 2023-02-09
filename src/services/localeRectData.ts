@@ -19,6 +19,7 @@ export function createRect(data?: Partial<RectOptions>): RectOptions {
     ry: 0,
     fill: true,
     stroke: true,
+    strokeStyle: 'black',
     ...data,
   }
 }

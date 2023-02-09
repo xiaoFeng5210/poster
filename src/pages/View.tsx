@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Canvas from '~/lib/Canvas'
 import { useCanvas2DStore } from '~/store/canvasStore'
-import { createRect } from '~/services'
+import { createRect, randomPosition } from '~/services'
 import '~/styles/view.scss'
 import Rect from '~/lib/Rect'
 import { Button } from '@arco-design/web-react'
@@ -14,14 +14,9 @@ function View() {
     setCanvas(canvas)
   }, []);
 
-  useEffect(() => {
-    if (_canvas) {
-    }
-  }, [_canvas])
-
   function addRect() {
     if (_canvas) {
-      const rect = createRect({ top: 0, left: 0, width: 500, height: 500 });
+      const rect = createRect({ ...randomPosition(_canvas), width: 100, height: 100 });
       (_canvas as Canvas).add(new Rect(rect))
     }
   }
