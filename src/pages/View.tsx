@@ -15,7 +15,7 @@ function View() {
   }, []);
 
   return (
-    <div className='g_box'>
+    <div className='g_box' id="canvas_box">
       <canvas id='lower_canvas' />
       {/* <Button className="position-absolute top-0 left-0" onClick={testDraw}>测试</Button> */}
       <Tools />

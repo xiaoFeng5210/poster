@@ -23,7 +23,8 @@ class Canvas {
   /** 缓冲层画布环境 */
   public contextCache!: CanvasRenderingContext2D;
   /** 整个画布到上面和左边的偏移量 */
-  private _offset!: { top: number; left: number }
+  public _offset: { top: number; left: number } = { top: 0, left: 0 }
+  /** 整个画布的缩放 TODO: */
   /** 画布中所有添加的物体实例 */
   private _objects: ObjectArg[] = [];
 
