@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
 import Canvas from '~/lib/Canvas'
 import { useCanvas2DStore } from '~/store/canvasStore'
-import { createRect, randomPosition } from '~/services'
 import '~/styles/view.scss'
-import Rect from '~/lib/Rect'
-import { Button } from '@arco-design/web-react'
 import { Tools } from '~/components'
 
 function View() {
@@ -13,7 +10,6 @@ function View() {
     const canvas = new Canvas((document.getElementById('lower_canvas') as HTMLCanvasElement), { width: 2180, height: 1060 })
     setCanvas(canvas)
   }, []);
-
   return (
     <div className='g_box' id="canvas_box">
       <canvas id='lower_canvas' />
