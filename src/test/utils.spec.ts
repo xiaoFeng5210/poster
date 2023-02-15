@@ -13,4 +13,8 @@ describe('Util', () => {
     Util.removeFromArray(arr, 3);
     expect(arr).toEqual([1, 2, 4, 5]);
   })
+  // it('确定这个函数可以创建一个canvas元素', () => {
+  //   const canvas = Util.createCanvasElement();
+  //   expect(canvas).toBeInstanceOf(HTMLCanvasElement);
+  // })
 })  
