@@ -33,7 +33,7 @@ class Canvas {
     this.width = options.width;
     this.height = options.height;
     this._initLowerCanvas(el);
-
+    // this.drawGrid()
   }
 
   protected _initLowerCanvas(el: HTMLCanvasElement) {
@@ -57,6 +57,23 @@ class Canvas {
       obj.render(ctx)
     })
     return this
+  }
+
+  public drawGrid() {
+    const ctx = this.contextContainer;
+    ctx.strokeStyle = "#ccc";
+    for (let i = 0; i <= this.width, i += 50;) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, this.height);
+      ctx.stroke();
+    }
+    for (let i = 0; i <= this.height, i += 50;) {
+      ctx.beginPath();
+      ctx.moveTo(0, i);
+      ctx.lineTo(this.width, i);
+      ctx.stroke();
+    }
   }
 
   public clearContext(ctx: CanvasRenderingContext2D) {
