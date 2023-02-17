@@ -56,54 +56,7 @@ class FabricObject {
 
   setOptions(options: BaseClass) {
     if (options) {
-      let key: BaseClassKey
-      for (key in options) {
-        if (options.hasOwnProperty(key)) {
-          switch (key) {
-            case 'type':
-              this.type = options.type
-              break
-            case 'visible':
-              this.visible = options.visible
-              break
-            case 'active':
-              this.active = options.active
-              break;
-            case 'top':
-              this.top = options.top
-              break
-            case 'left':
-              this.left = options.left
-              break
-            case 'width':
-              this.width = options.width
-              break
-            case 'height':
-              this.height = options.height
-              break
-            case 'scaleX':
-              this.scaleX = options.scaleX
-              break
-            case 'scaleY':
-              this.scaleY = options.scaleY
-              break
-            case 'angle':
-              this.angle = options.angle
-              break
-            case 'originX':
-              this.originX = options.originX
-              break
-            case 'originY':
-              this.originY = options.originY
-              break
-            case 'stateProperties':
-              this.stateProperties = options.stateProperties
-              break
-            default:
-              break
-          }
-        }
-      }
+      Object.assign(this, options)
     }
   }
 
