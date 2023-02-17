@@ -50,11 +50,11 @@ class FabricObject {
   /** 列举常用的属性 */
   public stateProperties: string[] = ('top left width height scaleX scaleY ' + 'angle fill originX originY ' + 'stroke strokeWidth ' + 'borderWidth visible').split(' ');
 
-  constructor(options: BaseClass) {
-    this.setOptions(options);
+  constructor(options: Partial<BaseClass>) {
+    this.setOptions<Partial<BaseClass>>(options);
   }
 
-  setOptions(options: BaseClass) {
+  setOptions<T>(options: T) {
     if (options) {
       Object.assign(this, options)
     }
