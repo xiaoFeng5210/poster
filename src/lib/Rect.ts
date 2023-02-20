@@ -26,8 +26,7 @@ class Rect extends FabricObject {
 
   /** 初始化圆角值 */
   _initRect(options: Options) {
-    this.rx = options.rx || 0;
-    this.ry = options.ry || 0;
+    Object.assign(this, options ?? {})
     this.strokeStyle = options.strokeStyle || 'black'
   }
 

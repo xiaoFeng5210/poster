@@ -24,7 +24,7 @@ export const useCanvas2DStore = create<State & Action>((set, get) => ({
   addRect: () => {
     const { _canvas } = get()
     if (_canvas) {
-      const rect = createRect({ ...randomPosition(_canvas), width: 100, height: 100 });
+      const rect = createRect({ ...randomPosition(_canvas), width: 150, height: 100 });
       (_canvas as Canvas).add(new Rect(rect))
     }
   },

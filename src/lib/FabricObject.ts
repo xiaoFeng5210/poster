@@ -18,8 +18,6 @@ export interface BaseClass {
   stroke: boolean
 }
 
-export type BaseClassKey = keyof BaseClass
-
 class FabricObject {
   /** 物体类型标识 */
   public type: string = 'object';
@@ -78,8 +76,6 @@ class FabricObject {
   _render(ctx: CanvasRenderingContext2D) {
 
   }
-
-
 }
 
 export default FabricObject

@@ -28,12 +28,11 @@ class Canvas {
   /** 画布中所有添加的物体实例 */
   private _objects: ObjectArg[] = [];
 
-
   constructor(el: HTMLCanvasElement, options: Options) {
     this.width = options.width;
     this.height = options.height;
     this._initLowerCanvas(el);
-    // this.drawGrid()
+    this.drawGrid(this.contextContainer)
   }
 
   protected _initLowerCanvas(el: HTMLCanvasElement) {
@@ -52,32 +51,53 @@ class Canvas {
 
   public renderAll(): Canvas {
     const ctx = this.contextContainer; // 下层画布环境
-    this.clearContext(ctx);
+    this.reset(this.contextContainer)
     this._objects.forEach(obj => {
       obj.render(ctx)
     })
     return this
   }
 
-  public drawGrid() {
-    const ctx = this.contextContainer;
-    ctx.strokeStyle = "#ccc";
-    for (let i = 0; i <= this.width, i += 50;) {
+  // 绘制网格线
+  drawGrid(ctx: CanvasRenderingContext2D) {
+    const gradient = ctx.createLinearGradient(0, 0, this.width, this.height);
+    gradient.addColorStop(0, "#fff"); // 渐变开始颜色为白色
+    gradient.addColorStop(1, "#ccc"); // 渐变结束颜色为灰色
+    // 设置网格线颜色为渐变色
+    ctx.strokeStyle = gradient;
+    // 设置网格线为虚线
+    ctx.setLineDash([3, 3]);
+    for (let i = 0; i <= this.width; i += 20) {
       ctx.beginPath();
       ctx.moveTo(i, 0);
       ctx.lineTo(i, this.height);
       ctx.stroke();
     }
-    for (let i = 0; i <= this.height, i += 50;) {
+    for (let i = 0; i <= this.height; i += 20) {
       ctx.beginPath();
       ctx.moveTo(0, i);
       ctx.lineTo(this.width, i);
       ctx.stroke();
     }
+    // 设置网格线为实线
+    ctx.setLineDash([]);
+  }
+
+  animate() {
+    // requestAnimationFrame(() => {
+    //   this.animate();
+    //   this.drawGrid(this.contextContainer);
+    // })
   }
 
   public clearContext(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, this.width, this.height);
+    return this
+  }
+
+  public reset(ctx: CanvasRenderingContext2D) {
+    this.clearContext(ctx);
+    this.drawGrid(ctx);
     return this
   }
 }
