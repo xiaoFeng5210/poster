@@ -5,6 +5,7 @@ export interface Options extends BaseClass {
   rx: number,
   ry: number,
   strokeStyle: string
+  fillStyle: string
 }
 
 class Rect extends FabricObject {
@@ -13,6 +14,7 @@ class Rect extends FabricObject {
   public rx: number = 0;
   public ry: number = 0;
   public strokeStyle: string = 'black'
+  public fillStyle: string = 'rgb(224, 62, 26)'
 
   constructor(options: Options) {
     super(options);
@@ -28,6 +30,7 @@ class Rect extends FabricObject {
   _initRect(options: Options) {
     Object.assign(this, options ?? {})
     this.strokeStyle = options.strokeStyle || 'black'
+    this.fillStyle = options.fillStyle || 'black'
   }
 
   _render(ctx: CanvasRenderingContext2D) {
@@ -39,6 +42,7 @@ class Rect extends FabricObject {
       w = this.width,
       h = this.height;
     ctx.strokeStyle = this.strokeStyle
+    ctx.fillStyle = this.fillStyle
     ctx.moveTo(x + rx, y);
     ctx.lineTo(x + w - rx, y);
     ctx.bezierCurveTo(x + w, y, x + w, y + ry, x + w, y + ry);

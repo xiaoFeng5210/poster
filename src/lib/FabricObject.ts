@@ -15,6 +15,7 @@ export interface BaseClass {
   originY: string
   stateProperties: string[]
   fill: boolean
+  fillStyle: string
   stroke: boolean
 }
 
