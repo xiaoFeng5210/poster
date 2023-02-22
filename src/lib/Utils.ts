@@ -1,4 +1,9 @@
 const PiBy180 = Math.PI / 180; // 写在这里相当于缓存，因为会频繁调用
+
+interface Point {
+  x: number;
+  y: number;
+}
 class Util {
   /** 单纯的创建一个新的 canvas 元素 */
   static createCanvasElement() {
@@ -51,6 +56,31 @@ class Util {
         done();
       }
     });
+  }
+
+  static min(points: number[]): number {
+    return Math.min(...points);
+  }
+
+  static max(points: number[]): number {
+    return Math.max(...points)
+  }
+  // 包围盒的宽高
+  static makeBoundingBoxFromPoints(points: Point[]) {
+    const xPoints = points.map(point => point.x);
+    const yPoints = points.map(point => point.y);
+    const minX = Util.min(xPoints);
+    const maxX = Util.max(xPoints);
+    const minY = Util.min(yPoints);
+    const maxY = Util.max(yPoints);
+    const width = Math.abs(maxX - minX);
+    const height = Math.abs(maxY - minY);
+    return {
+      left: minX,
+      top: minY,
+      width: width,
+      height: height,
+    };
   }
 }
 

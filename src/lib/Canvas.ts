@@ -66,7 +66,7 @@ class Canvas {
     // 设置网格线颜色为渐变色
     ctx.strokeStyle = gradient;
     // 设置网格线为虚线
-    ctx.setLineDash([3, 3]);
+    ctx.setLineDash([2, 2]);
     for (let i = 0; i <= this.width; i += 20) {
       ctx.beginPath();
       ctx.moveTo(i, 0);

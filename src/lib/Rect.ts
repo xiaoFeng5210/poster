@@ -21,6 +21,8 @@ class Rect extends FabricObject {
     this._initRect(options);
   }
 
+
+
   /** 一些共有的和独有的属性 */
   _initStateProperties() {
     this.stateProperties = this.stateProperties.concat(['rx', 'ry']);
