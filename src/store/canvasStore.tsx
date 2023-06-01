@@ -1,8 +1,8 @@
 import { create } from 'zustand'
+import type Canvas from '../lib/Canvas'
+import { ToolsEnum } from '../services'
 import Rect from '~/lib/Rect'
 import { createRect, randomPosition } from '~/services'
-import Canvas from '../lib/Canvas'
-import { ToolsEnum } from '../services'
 
 interface State {
   _canvas: Partial<Canvas>
@@ -33,9 +33,9 @@ export const useCanvas2DStore = create<State & Action>((set, get) => ({
     switch (type) {
       case ToolsEnum.Rect:
         get().addRect()
-        break;
+        break
       default:
-        break;
+        break
     }
-  }
+  },
 }))
