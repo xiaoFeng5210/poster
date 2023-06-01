@@ -9,7 +9,7 @@ function View() {
   useEffect(() => {
     const canvas = new Canvas((document.getElementById('lower_canvas') as HTMLCanvasElement), { width: 2180, height: 1060 })
     setCanvas(canvas)
-  }, []);
+  }, [])
   return (
     <div className='g_box' id="canvas_box">
       <canvas id='lower_canvas' />

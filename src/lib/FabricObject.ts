@@ -79,7 +79,9 @@ class FabricObject {
   }
 
   drawBorders(ctx: CanvasRenderingContext2D): FabricObject {
-    const padding = 0; const padding2 = padding * 2; const strokeWidth = 1
+    const padding = 0
+    const padding2 = padding * 2
+    const strokeWidth = 1
     ctx.save()
     ctx.globalAlpha = this.isMoving ? 0.5 : 1 // 物体变换的时候使其透明度减半，提升用户体验
     ctx.strokeStyle = this.borderColor
@@ -101,12 +103,6 @@ class FabricObject {
     return this
   }
 
-  // 父类先写一个方法放在这里，子类可以重写
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _render(ctx: CanvasRenderingContext2D) {
-
-  }
-
   /** 获取当前大小，包含缩放效果 */
   getWidth(): number {
     return this.width * this.scaleX
@@ -115,6 +111,12 @@ class FabricObject {
   /** 获取当前大小，包含缩放效果 */
   getHeight(): number {
     return this.height * this.scaleY
+  }
+
+  // 父类先写一个方法放在这里，子类可以重写
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _render(ctx: CanvasRenderingContext2D) {
+
   }
 }
 

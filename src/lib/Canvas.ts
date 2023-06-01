@@ -1,58 +1,59 @@
-import { ObjectArg } from '~/types'
+import type { ObjectArg } from '~/types'
 
 interface Options {
-  width: number;
-  height: number;
+  width: number
+  height: number
 }
 
 class Canvas {
-  public width!: number;
-  public height!: number;
-  /**包围canvas的外层容器 */
-  public wrapperEl!: HTMLElement;
+  public width!: number
+  public height!: number
+  /** 包围canvas的外层容器 */
+  public wrapperEl!: HTMLElement
   /** 下层 canvas 画布，主要用于绘制所有物体 */
-  public lowerCanvasEl!: HTMLCanvasElement;
+  public lowerCanvasEl!: HTMLCanvasElement
   /** 上层 canvas，主要用于监听鼠标事件、涂鸦模式、左键点击拖蓝框选区域 */
-  public upperCanvasEl!: HTMLCanvasElement;
+  public upperCanvasEl!: HTMLCanvasElement
   /** 缓冲层画布 */
-  public cacheCanvasEl!: HTMLCanvasElement;
+  public cacheCanvasEl!: HTMLCanvasElement
   /** 上层画布环境 */
-  public contextTop!: CanvasRenderingContext2D;
+  public contextTop!: CanvasRenderingContext2D
   /** 下层画布环境 */
-  public contextContainer!: CanvasRenderingContext2D;
+  public contextContainer!: CanvasRenderingContext2D
   /** 缓冲层画布环境 */
-  public contextCache!: CanvasRenderingContext2D;
+  public contextCache!: CanvasRenderingContext2D
   /** 整个画布到上面和左边的偏移量 */
   public _offset: { top: number; left: number } = { top: 0, left: 0 }
   /** 整个画布的缩放 TODO: */
   /** 画布中所有添加的物体实例 */
-  private _objects: ObjectArg[] = [];
+  private _objects: ObjectArg[] = []
 
   constructor(el: HTMLCanvasElement, options: Options) {
-    this.width = options.width;
-    this.height = options.height;
-    this._initLowerCanvas(el);
+    this.width = options.width
+    this.height = options.height
+    this._initLowerCanvas(el)
     this.drawGrid(this.contextContainer)
   }
 
   protected _initLowerCanvas(el: HTMLCanvasElement) {
-    this.lowerCanvasEl = el;
-    this.contextContainer = this.lowerCanvasEl.getContext('2d') as CanvasRenderingContext2D;
-    this.lowerCanvasEl.width = this.width;
-    this.lowerCanvasEl.height = this.height;
-    this.lowerCanvasEl.style.width = this.width + 'px';
-    this.lowerCanvasEl.style.height = this.height + 'px';
+    this.lowerCanvasEl = el
+    this.contextContainer = this.lowerCanvasEl.getContext('2d') as CanvasRenderingContext2D
+    this.lowerCanvasEl.width = this.width
+    this.lowerCanvasEl.height = this.height
+    this.lowerCanvasEl.style.width = `${this.width}px`
+    this.lowerCanvasEl.style.height = `${this.height}px`
   }
+
   public add(...args: ObjectArg[]): Canvas {
-    this._objects.push(...args);
+    this._objects.push(...args)
     this.renderAll()
     return this
   }
 
   public renderAll(): Canvas {
-    const ctx = this.contextContainer; // 下层画布环境
+    const ctx = this.contextContainer // 下层画布环境
     this.reset(this.contextContainer)
-    this._objects.forEach(obj => {
+    this._objects.forEach((obj) => {
       obj.render(ctx)
     })
     return this
@@ -60,27 +61,27 @@ class Canvas {
 
   // 绘制网格线
   drawGrid(ctx: CanvasRenderingContext2D) {
-    const gradient = ctx.createLinearGradient(0, 0, this.width, this.height);
-    gradient.addColorStop(0, "#fff"); // 渐变开始颜色为白色
-    gradient.addColorStop(1, "#ccc"); // 渐变结束颜色为灰色
+    const gradient = ctx.createLinearGradient(0, 0, this.width, this.height)
+    gradient.addColorStop(0, '#fff') // 渐变开始颜色为白色
+    gradient.addColorStop(1, '#ccc') // 渐变结束颜色为灰色
     // 设置网格线颜色为渐变色
-    ctx.strokeStyle = gradient;
+    ctx.strokeStyle = gradient
     // 设置网格线为虚线
-    ctx.setLineDash([2, 2]);
+    ctx.setLineDash([2, 2])
     for (let i = 0; i <= this.width; i += 20) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i, this.height);
-      ctx.stroke();
+      ctx.beginPath()
+      ctx.moveTo(i, 0)
+      ctx.lineTo(i, this.height)
+      ctx.stroke()
     }
     for (let i = 0; i <= this.height; i += 20) {
-      ctx.beginPath();
-      ctx.moveTo(0, i);
-      ctx.lineTo(this.width, i);
-      ctx.stroke();
+      ctx.beginPath()
+      ctx.moveTo(0, i)
+      ctx.lineTo(this.width, i)
+      ctx.stroke()
     }
     // 设置网格线为实线
-    ctx.setLineDash([]);
+    ctx.setLineDash([])
   }
 
   animate() {
@@ -91,13 +92,13 @@ class Canvas {
   }
 
   public clearContext(ctx: CanvasRenderingContext2D) {
-    ctx.clearRect(0, 0, this.width, this.height);
+    ctx.clearRect(0, 0, this.width, this.height)
     return this
   }
 
   public reset(ctx: CanvasRenderingContext2D) {
-    this.clearContext(ctx);
-    this.drawGrid(ctx);
+    this.clearContext(ctx)
+    this.drawGrid(ctx)
     return this
   }
 }
