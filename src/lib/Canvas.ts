@@ -29,8 +29,7 @@ class Canvas {
   private _objects: ObjectArg[] = []
 
   constructor(el: HTMLCanvasElement, options: Options) {
-    this.width = options.width
-    this.height = options.height
+    Object.assign(this, options)
     this._initLowerCanvas(el)
     this.drawGrid(this.contextContainer)
   }
@@ -85,18 +84,15 @@ class Canvas {
   }
 
   animate() {
-    // requestAnimationFrame(() => {
-    //   this.animate();
-    //   this.drawGrid(this.contextContainer);
-    // })
+
   }
 
-  public clearContext(ctx: CanvasRenderingContext2D) {
+  public clearContext(ctx: CanvasRenderingContext2D): Canvas {
     ctx.clearRect(0, 0, this.width, this.height)
     return this
   }
 
-  public reset(ctx: CanvasRenderingContext2D) {
+  public reset(ctx: CanvasRenderingContext2D): Canvas {
     this.clearContext(ctx)
     this.drawGrid(ctx)
     return this
