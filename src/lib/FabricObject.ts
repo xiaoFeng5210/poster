@@ -67,6 +67,7 @@ class FabricObject {
     this.transform(ctx)
     // 绘制物体
     this._render(ctx)
+    // 监测物体是否处于激活态，如果是的话就绘制边框
     if (this.active)
       this.drawBorders(ctx)
     ctx.restore()
@@ -103,10 +104,9 @@ class FabricObject {
     return this
   }
 
-  drawControls(ctx: CanvasRenderingContext2D) {
-    // TODO: 画控制点
+  // TODO: drawControls(ctx: CanvasRenderingContext2D) {
 
-  }
+  // }
 
   /** 获取当前大小，包含缩放效果 */
   getWidth(): number {

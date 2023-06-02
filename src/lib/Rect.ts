@@ -1,6 +1,5 @@
 import type { BaseClass } from './FabricObject'
 import FabricObject from './FabricObject'
-import Util from './Utils'
 
 export interface Options extends BaseClass {
   rx: number
@@ -35,7 +34,6 @@ class Rect extends FabricObject {
   }
 
   _render(ctx: CanvasRenderingContext2D) {
-    console.log(ctx)
     const rx = this.rx || 0
     const ry = this.ry || 0
     const x = -this.width / 2

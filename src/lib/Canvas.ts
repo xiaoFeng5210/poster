@@ -26,7 +26,10 @@ class Canvas {
   public _offset: { top: number; left: number } = { top: 0, left: 0 }
   /** 整个画布的缩放 TODO: */
   /** 画布中所有添加的物体实例 */
-  private _objects: ObjectArg[] = []
+  public _objects: ObjectArg[] = []
+
+  /** 这里我们需要存储一个点击点的坐标 */
+  public _clickPoint: { x: number; y: number } = { x: 0, y: 0 }
 
   constructor(el: HTMLCanvasElement, options: Options) {
     Object.assign(this, options)
@@ -53,6 +56,10 @@ class Canvas {
     const ctx = this.contextContainer // 下层画布环境
     this.reset(this.contextContainer)
     this._objects.forEach((obj) => {
+      // 判断物体是否在点击点上
+      obj.active = ctx.isPointInPath(this._clickPoint.x, this._clickPoint.y)
+      console.log(this._clickPoint)
+      console.log(obj)
       obj.render(ctx)
     })
     return this
