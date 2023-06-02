@@ -6,6 +6,9 @@ interface Options {
 }
 
 class Canvas {
+  /** 这里我们需要存储一个点击点的坐标 */
+  static _clickPoint: { x: number; y: number } = { x: 0, y: 0 }
+
   public width!: number
   public height!: number
   /** 包围canvas的外层容器 */
@@ -28,22 +31,30 @@ class Canvas {
   /** 画布中所有添加的物体实例 */
   public _objects: ObjectArg[] = []
 
-  /** 这里我们需要存储一个点击点的坐标 */
-  public _clickPoint: { x: number; y: number } = { x: 0, y: 0 }
-
-  constructor(el: HTMLCanvasElement, options: Options) {
+  constructor(els: HTMLCanvasElement[], options: Options) {
     Object.assign(this, options)
-    this._initLowerCanvas(el)
+    this._initLowerCanvas(els[0])
+    this._initUpperCanvas(els[1])
     this.drawGrid(this.contextContainer)
   }
 
   protected _initLowerCanvas(el: HTMLCanvasElement) {
     this.lowerCanvasEl = el
     this.contextContainer = this.lowerCanvasEl.getContext('2d') as CanvasRenderingContext2D
-    this.lowerCanvasEl.width = this.width
-    this.lowerCanvasEl.height = this.height
-    this.lowerCanvasEl.style.width = `${this.width}px`
-    this.lowerCanvasEl.style.height = `${this.height}px`
+    this.initCanvasSize(this.lowerCanvasEl)
+  }
+
+  protected _initUpperCanvas(el: HTMLCanvasElement) {
+    this.upperCanvasEl = el
+    this.contextTop = this.upperCanvasEl.getContext('2d') as CanvasRenderingContext2D
+    this.initCanvasSize(this.upperCanvasEl)
+  }
+
+  private initCanvasSize(canvasEl: HTMLCanvasElement) {
+    canvasEl.width = this.width
+    canvasEl.height = this.height
+    canvasEl.style.width = `${this.width}px`
+    canvasEl.style.height = `${this.height}px`
   }
 
   public add(...args: ObjectArg[]): Canvas {
@@ -57,9 +68,8 @@ class Canvas {
     this.reset(this.contextContainer)
     this._objects.forEach((obj) => {
       // 判断物体是否在点击点上
-      obj.active = ctx.isPointInPath(this._clickPoint.x, this._clickPoint.y)
-      console.log(this._clickPoint)
-      console.log(obj)
+      // obj.active = ctx.isPointInPath(this._clickPoint.x, this._clickPoint.y)
+      obj.active = true
       obj.render(ctx)
     })
     return this

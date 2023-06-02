@@ -1,3 +1,4 @@
+import Canvas from './Canvas'
 import Util from '~/lib/Utils'
 
 export interface BaseClass {
@@ -47,7 +48,7 @@ class FabricObject {
   public fill = false
   public stroke = true
   public isMoving = false
-  public borderColor = ''
+  public borderColor = '#4093F9'
   /** 列举常用的属性 */
   public stateProperties: string[] = ('top left width height scaleX scaleY ' + 'angle fill originX originY ' + 'stroke strokeWidth ' + 'borderWidth visible').split(' ')
 
@@ -65,9 +66,11 @@ class FabricObject {
       return
     ctx.save()
     this.transform(ctx)
-    // 绘制物体
+    // 下层画布绘制物体
     this._render(ctx)
     // 监测物体是否处于激活态，如果是的话就绘制边框
+    this.active = Canvas._clickPoint.x >= this.left - this.getWidth() / 2 && Canvas._clickPoint.x <= this.left + this.getWidth() / 2 && Canvas._clickPoint.y >= this.top - this.getHeight() / 2 && Canvas._clickPoint.y <= this.top + this.getHeight() / 2
+    console.log(this.active)
     if (this.active)
       this.drawBorders(ctx)
     ctx.restore()
@@ -82,7 +85,7 @@ class FabricObject {
   drawBorders(ctx: CanvasRenderingContext2D): FabricObject {
     const padding = 0
     const padding2 = padding * 2
-    const strokeWidth = 1
+    const strokeWidth = 2
     ctx.save()
     ctx.globalAlpha = this.isMoving ? 0.5 : 1 // 物体变换的时候使其透明度减半，提升用户体验
     ctx.strokeStyle = this.borderColor

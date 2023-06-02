@@ -4,10 +4,16 @@
   // background-color: red;
   margin: 0 auto;
   overflow: hidden;
-  position: relative
+  position: relative;
 }
 
 #lower_canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+#upper_canvas {
   top: 0;
   left: 0;
   position: absolute;
