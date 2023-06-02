@@ -103,6 +103,11 @@ class FabricObject {
     return this
   }
 
+  drawControls(ctx: CanvasRenderingContext2D) {
+    // TODO: 画控制点
+
+  }
+
   /** 获取当前大小，包含缩放效果 */
   getWidth(): number {
     return this.width * this.scaleX
