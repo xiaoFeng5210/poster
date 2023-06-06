@@ -67,7 +67,6 @@ class Canvas {
     const ctx = this.contextContainer // 下层画布环境
     this.reset(this.contextContainer)
     this._objects.forEach((obj) => {
-      console.log(obj)
       obj.render(ctx)
     })
     return this
@@ -104,8 +103,6 @@ class Canvas {
 
   public clearContext(ctx: CanvasRenderingContext2D): Canvas {
     ctx.clearRect(0, 0, this.width, this.height)
-    ctx.fillStyle = ''
-    ctx.strokeStyle = ''
     return this
   }
 
