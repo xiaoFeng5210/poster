@@ -18,7 +18,7 @@ class Circle extends FabricObject {
   public startAngle = 0
   public endAngle = 2 * Math.PI
   public strokeStyle = 'black'
-  public fillStyle = '#A18CD1'
+  private fillStyle = '#A18CD1'
 
   constructor(options: Partial<Options>) {
     super(options)
@@ -29,9 +29,6 @@ class Circle extends FabricObject {
     Object.assign(this, options ?? {})
     this.width = this.r * 2
     this.height = this.r * 2
-    this.cx = this.left
-    this.cy = this.top
-    console.log(this)
   }
 
   _render(ctx: CanvasRenderingContext2D) {

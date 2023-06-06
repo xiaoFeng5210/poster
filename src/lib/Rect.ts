@@ -14,9 +14,9 @@ class Rect extends FabricObject {
   public rx = 0
   public ry = 0
   public strokeStyle = 'black'
-  public fillStyle = 'rgb(224, 62, 26)'
+  private fillStyle = '#008B8B'
 
-  constructor(options: Options) {
+  constructor(options: Partial<Options>) {
     super(options)
     this._initRect(options)
   }
@@ -27,11 +27,8 @@ class Rect extends FabricObject {
   }
 
   /** 初始化圆角值 */
-  _initRect(options: Options) {
+  _initRect(options: Partial<Options>) {
     Object.assign(this, options ?? {})
-    this.strokeStyle = options.strokeStyle || 'black'
-    this.fillStyle = options.fillStyle || 'black'
-    console.log(this)
   }
 
   _render(ctx: CanvasRenderingContext2D) {
@@ -41,6 +38,7 @@ class Rect extends FabricObject {
     const y = -this.height / 2
     const w = this.width
     const h = this.height
+    ctx.beginPath()
     ctx.strokeStyle = this.strokeStyle
     ctx.fillStyle = this.fillStyle
     ctx.moveTo(x + rx, y)
@@ -57,6 +55,7 @@ class Rect extends FabricObject {
       ctx.fill()
     if (this.stroke)
       ctx.stroke()
+    ctx.closePath()
   }
 }
 

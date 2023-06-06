@@ -1,5 +1,4 @@
 import type { RectOptions } from '~/types'
-import { ObjectArg } from '~/types'
 
 export function createRect(data?: Partial<RectOptions>): RectOptions {
   return {

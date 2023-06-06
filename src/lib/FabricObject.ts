@@ -32,9 +32,9 @@ class FabricObject {
   /** 物体位置的 left 值，就是 x */
   public left = 0
   /** 物体的原始宽度 */
-  public width = 0
+  public width = 100
   /** 物体的原始高度 */
-  public height = 0
+  public height = 100
   /** 物体当前的缩放倍数 x */
   public scaleX = 1
   /** 物体当前的缩放倍数 y */
