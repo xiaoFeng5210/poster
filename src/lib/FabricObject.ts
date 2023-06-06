@@ -45,8 +45,8 @@ class FabricObject {
   public originX = 'left'
   /** 默认垂直变换中心 top | bottom | center */
   public originY = 'left'
-  public fill = false
-  public stroke = true
+  public fill = true
+  public stroke = false
   public isMoving = false
   public borderColor = '#4093F9'
   /** 列举常用的属性 */
@@ -70,7 +70,6 @@ class FabricObject {
     this._render(ctx)
     // 监测物体是否处于激活态，如果是的话就绘制边框
     this.active = Canvas._clickPoint.x >= this.left - this.getWidth() / 2 && Canvas._clickPoint.x <= this.left + this.getWidth() / 2 && Canvas._clickPoint.y >= this.top - this.getHeight() / 2 && Canvas._clickPoint.y <= this.top + this.getHeight() / 2
-    console.log(this.active)
     if (this.active)
       this.drawBorders(ctx)
     ctx.restore()
@@ -83,7 +82,7 @@ class FabricObject {
   }
 
   drawBorders(ctx: CanvasRenderingContext2D): FabricObject {
-    const padding = 0
+    const padding = 2
     const padding2 = padding * 2
     const strokeWidth = 2
     ctx.save()

@@ -67,9 +67,6 @@ class Canvas {
     const ctx = this.contextContainer // 下层画布环境
     this.reset(this.contextContainer)
     this._objects.forEach((obj) => {
-      // 判断物体是否在点击点上
-      // obj.active = ctx.isPointInPath(this._clickPoint.x, this._clickPoint.y)
-      obj.active = true
       obj.render(ctx)
     })
     return this

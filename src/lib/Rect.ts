@@ -31,6 +31,7 @@ class Rect extends FabricObject {
     Object.assign(this, options ?? {})
     this.strokeStyle = options.strokeStyle || 'black'
     this.fillStyle = options.fillStyle || 'black'
+    console.log(this)
   }
 
   _render(ctx: CanvasRenderingContext2D) {

@@ -1,6 +1,6 @@
-import Canvas from "~/lib/Canvas"
+import type Canvas from '~/lib/Canvas'
 
-export const randomPosition = (_canvas: Partial<Canvas>): { top: number, left: number } => {
+export const randomPosition = (_canvas: Partial<Canvas>): { top: number; left: number } => {
   const offsetArr = [
     [0, 0],
     [-200, 0],

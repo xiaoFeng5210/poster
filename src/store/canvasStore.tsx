@@ -3,6 +3,7 @@ import type Canvas from '../lib/Canvas'
 import { ToolsEnum } from '../services'
 import Rect from '~/lib/Rect'
 import { createRect, randomPosition } from '~/services'
+import Circle from '~/lib/Circle'
 
 interface State {
   _canvas: Partial<Canvas>
@@ -15,6 +16,7 @@ interface Action {
   setCanvasItem: (item: Partial<Canvas>) => void
   setClickPoint: (x: number, y: number) => void
   addRect: () => void
+  addCircle: () => void
   addObject: (type: ToolsEnum) => void
 }
 
@@ -29,8 +31,16 @@ export const useCanvas2DStore = create<State & Action>((set, get) => ({
   addRect: () => {
     const { _canvas } = get()
     if (_canvas) {
-      const rect = createRect({ ...randomPosition(_canvas), width: 150, height: 100 });
+      const rect = createRect({ ...randomPosition(_canvas), width: 100, height: 100 });
       (_canvas as Canvas).add(new Rect(rect))
+    }
+  },
+
+  addCircle: () => {
+    const { _canvas } = get()
+    if (_canvas) {
+      const circle = { ...randomPosition(_canvas) };
+      (_canvas as Canvas).add(new Circle(circle))
     }
   },
 
@@ -38,6 +48,9 @@ export const useCanvas2DStore = create<State & Action>((set, get) => ({
     switch (type) {
       case ToolsEnum.Rect:
         get().addRect()
+        break
+      case ToolsEnum.Circle:
+        get().addCircle()
         break
       default:
         break

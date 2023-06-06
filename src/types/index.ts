@@ -1,5 +1,6 @@
 import Rect from '~/lib/Rect'
+import Circle from '~/lib/Circle'
 
-export { Rect }
-export type ObjectArg = Rect
+export { Rect, Circle }
+export type ObjectArg = Rect | Circle
 export type { Options as RectOptions } from '~/lib/Rect'
