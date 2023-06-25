@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import Canvas from '~/lib/Canvas'
 import { useCanvas2DStore } from '~/store/canvasStore'
 import '~/styles/view.scss'
-import { AsideBar, Header, Tools } from '~/components'
+import { AsideBar, Attributes, Header, Tools } from '~/components'
+import { canvas_id } from '~/config/settings'
 // import Utils from '~/lib/Utils'
 
 function View() {
@@ -20,6 +21,9 @@ function View() {
       <Header />
       <main className="flex">
         <AsideBar />
+        <div id={canvas_id} className='flex-1 canvas_box'>
+        </div>
+        <Attributes />
       </main>
       {/* <canvas id='lower_canvas' /> */}
       {/* <canvas id='upper_canvas' onClick={event => listenClickCanvas(event)} /> */}

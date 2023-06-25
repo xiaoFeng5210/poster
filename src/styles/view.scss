@@ -22,3 +22,9 @@
   left: 0;
   position: absolute;
 }
+
+.canvas_box {
+  background-color: #F1F1F1;
+  // 写个内阴影
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
