@@ -1,0 +1,11 @@
+ul {
+  border-right: 1px solid #DCDEE2;
+  li {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

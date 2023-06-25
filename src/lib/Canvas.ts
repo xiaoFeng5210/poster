@@ -30,7 +30,6 @@ class Canvas {
   /** 整个画布的缩放 TODO: */
   /** 画布中所有添加的物体实例 */
   public _objects: ObjectArg[] = []
-
   constructor(els: HTMLCanvasElement[], options: Options) {
     Object.assign(this, options)
     this._initLowerCanvas(els[0])

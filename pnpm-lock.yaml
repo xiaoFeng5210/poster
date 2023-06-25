@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@antfu/eslint-config': ^0.34.1
+  '@antfu/eslint-config': ^0.34.2
   '@arco-design/web-react': ^2.44.0
   '@iconify/json': ^2.2.8
   '@types/node': ^18.11.18
@@ -12,7 +12,8 @@ specifiers:
   '@unocss/preset-uno': ^0.48.4
   '@vitejs/plugin-react': ^3.0.0
   arco: ^0.1.3
-  eslint: ^8.32.0
+  eslint: ^8.33.0
+  konva: ^9.2.0
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.6.2
@@ -27,6 +28,7 @@ dependencies:
   '@arco-design/web-react': 2.44.0_eb470c8c7e9f228ade54526bb46c0ad4
   '@types/node': 18.11.18
   arco: 0.1.3
+  konva: 9.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.8.0_react-dom@18.2.0+react@18.2.0
@@ -2841,6 +2843,10 @@ packages:
   /kolorist/1.6.0:
     resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
     dev: true
+
+  /konva/9.2.0:
+    resolution: {integrity: sha512-+woI76Sk+VFVl9z7zPkuTnN2zFpEYg27YWz8BCdQXpt5IS3pdnSPAPQVPPMidcbDi9/G5b/IOIp35/KqMGiYPA==}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
