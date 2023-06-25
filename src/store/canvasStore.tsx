@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type Canvas from '../lib/Canvas'
 import { ToolsEnum } from '../services'
 import Rect from '~/lib/Rect'
-import { createRect, randomPosition } from '~/services'
+import { randomPosition } from '~/services'
 import Circle from '~/lib/Circle'
 
 interface State {
