@@ -3,7 +3,6 @@ import { useKonvaStore } from '~/store/knovaStore'
 import '~/styles/view.scss'
 import { AsideBar, Attributes, Header } from '~/components'
 import { canvas_id } from '~/config/settings'
-// import Utils from '~/lib/Utils'
 
 function View() {
   const initKonva = useKonvaStore(state => state.init)
