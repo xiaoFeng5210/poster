@@ -36,12 +36,12 @@ const DrawingBoard: FC = () => {
     initKonva($box.clientWidth, $box.clientHeight)
     setOutBoxSize($box)
   }
-  useEffect(() => {
-    initDashboard()
-  }, [])
   const showStyles = useMemo(() => {
     return loading ? { display: 'none' } : { display: 'block' }
   }, [loading])
+  useEffect(() => {
+    initDashboard()
+  }, [])
   return (
     <div id={canvas_outer} className='flex-1 canvas_out relative overflow-hidden'>
       <Spin tip='This may take a while' loading={loading} style={{ width: '100%', height: '100%', marginTop: '400px' }} />
