@@ -46,13 +46,13 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     let scale = 1
     if (height > width) {
       if (outHeight > height)
-        scale = 0.7
+        scale = 0.6
       else
         scale = outHeight / height * 0.8
     }
     else {
       if (outWidth > width)
-        scale = 0.7
+        scale = 0.6
       else
         scale = outWidth / width * 0.8
     }
