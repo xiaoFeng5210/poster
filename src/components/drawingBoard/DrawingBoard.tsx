@@ -14,19 +14,20 @@ const DrawingBoard: FC = () => {
   const [loading, setLoading] = useState(true)
   const initKonva = useKonvaStore(state => state.init)
   const [scale, size] = useKonvaStore(state => [state.scale, state.size])
-  let canvasBoxStyles: BoxStyles | {} = {}
+  const [canvasBoxStyles, setCanvasBoxStyles] = useState<BoxStyles | {}>({})
+
   const setOutBoxSize = ($box: HTMLElement) => {
     if ($box.clientWidth && $box.clientHeight) {
       const outWidth = $box.clientWidth
       const outHeight = $box.clientHeight
       const left = (outWidth - size.width) / 2
       const top = (outHeight - size.height) / 2
-      canvasBoxStyles = {
+      setCanvasBoxStyles({
         left,
         top,
         transformOrigin: 'center',
         transform: `scale(${scale}) `,
-      }
+      })
       setLoading(false)
     }
   }
@@ -34,11 +35,15 @@ const DrawingBoard: FC = () => {
     // 获取画布外面元素的宽高
     const $box = document.getElementById(canvas_outer)!
     initKonva($box.clientWidth, $box.clientHeight)
-    setOutBoxSize($box)
   }
   const showStyles = useMemo(() => {
     return loading ? { display: 'none' } : { display: 'block' }
   }, [loading])
+  useEffect(() => {
+    const $box = document.getElementById(canvas_outer)
+    if ($box)
+      setOutBoxSize($box)
+  }, [scale])
   useEffect(() => {
     initDashboard()
   }, [])
