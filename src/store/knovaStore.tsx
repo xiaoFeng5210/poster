@@ -43,13 +43,26 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     stage.add(elementsLayer)
     set(() => ({ stage, backLayer, elementsLayer }))
     get().calculateScale(outWidth, outHeight)
+    // 加入onclick事件
+    get().stage!.on('click tap', (e) => {
+      if (e.target === stage) {
+        get().stage!.find('Transformer').destroy()
+        get().elementsLayer!.draw()
+      }
+      get().stage!.find('Transformer').destroy()
+
+      const tr = new Konva.Transformer()
+      get().elementsLayer!.add(tr)
+      tr.attachTo(e.target)
+      get().elementsLayer!.draw()
+    })
   },
   addRect: () => {
     const rect = {
       x: 150,
       y: 40,
-      width: 100,
-      height: 100,
+      width: 300,
+      height: 300,
       fill: '#F57274',
       draggable: true,
       name: `${uuidv4()} ${KonvaGraphType.Rect}`,
