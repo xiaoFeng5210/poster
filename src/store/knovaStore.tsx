@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import Konva from 'konva'
+import { v4 as uuidv4 } from 'uuid'
 import { canvas_id as container } from '~/config/settings'
 
 interface State {
@@ -16,6 +17,7 @@ interface State {
 interface Action {
   init: (width: number, height: number) => void
   calculateScale: (outWidth: number, outHeight: number) => void
+  addRect: () => void
 }
 export const useKonvaStore = create<State & Action>((set, get) => ({
   stage: null,
@@ -46,9 +48,10 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
       x: 150,
       y: 40,
       width: 100,
-      height: 50,
+      height: 100,
       fill: '#F57274',
       draggable: true,
+      name: `${uuidv4()} rect`,
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
   },
