@@ -1,15 +1,22 @@
 import type { FC } from 'react'
 import '~/styles/asidebar.scss'
 import { Trigger } from '@arco-design/web-react'
+import { Elements } from '~/components'
+import { ElementsGroup } from '~/services'
 
 const AsideBar: FC = () => {
+  const components = (key: ElementsGroup) => {
+    if (key === ElementsGroup.element)
+      return <Elements />
+    else return <></>
+  }
   const options = [{
     name: '元素',
-    key: 'element',
+    key: ElementsGroup.element,
     icon: 'i-ep-element-plus',
   }, {
     name: '图层',
-    key: 'layer',
+    key: ElementsGroup.layer,
     icon: 'i-uil-layer-group',
   }]
   return (
@@ -20,7 +27,7 @@ const AsideBar: FC = () => {
             <Trigger showArrow key={index}
               trigger='click'
               position='rt'
-              popup={() => (<div className="w-100px h-100px bg-white">1233333</div>)}
+              popup={() => (<div className="w-220px h-auto p-10px bg-white">{components(item.key)}</div>)}
               >
               <li className="hover:text-#4080FF hover:color-#4080FF">
                 <i className={`${item.icon} text-30px p-y-5px`}></i>
