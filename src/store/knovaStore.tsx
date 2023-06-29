@@ -41,6 +41,17 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     set(() => ({ stage, backLayer, elementsLayer }))
     get().calculateScale(outWidth, outHeight)
   },
+  addRect: () => {
+    const rect = {
+      x: 150,
+      y: 40,
+      width: 100,
+      height: 50,
+      fill: '#F57274',
+      draggable: true,
+    }
+    get().elementsLayer!.add(new Konva.Rect(rect))
+  },
   calculateScale: (outWidth: number, outHeight: number) => {
     const { width, height } = get().size
     let scale = 1
