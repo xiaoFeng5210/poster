@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import Konva from 'konva'
 import { v4 as uuidv4 } from 'uuid'
 import { canvas_id as container } from '~/config/settings'
+import { KonvaGraphType } from '~/services'
 
 interface State {
   stage: Konva.Stage | null
@@ -51,7 +52,7 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
       height: 100,
       fill: '#F57274',
       draggable: true,
-      name: `${uuidv4()} rect`,
+      name: `${uuidv4()} ${KonvaGraphType.Rect}`,
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
   },
