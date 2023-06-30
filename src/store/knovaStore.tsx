@@ -44,18 +44,18 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     set(() => ({ stage, backLayer, elementsLayer }))
     get().calculateScale(outWidth, outHeight)
     // 加入onclick事件
-    get().stage!.on('click tap', (e) => {
-      if (e.target === stage) {
-        get().stage!.find('Transformer').destroy()
-        get().elementsLayer!.draw()
-      }
-      get().stage!.find('Transformer').destroy()
+    // get().stage!.on('click tap', (e) => {
+    //   if (e.target === stage) {
+    //     get().stage!.find('Transformer').destroy()
+    //     get().elementsLayer!.draw()
+    //   }
+    //   get().stage!.find('Transformer').destroy()
 
-      const tr = new Konva.Transformer()
-      get().elementsLayer!.add(tr)
-      tr.attachTo(e.target)
-      get().elementsLayer!.draw()
-    })
+    //   const tr = new Konva.Transformer()
+    //   get().elementsLayer!.add(tr)
+    //   tr.attachTo(e.target)
+    //   get().elementsLayer!.draw()
+    // })
   },
   addRect: () => {
     const rect = {
