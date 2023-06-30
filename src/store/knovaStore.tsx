@@ -3,12 +3,13 @@ import Konva from 'konva'
 import { v4 as uuidv4 } from 'uuid'
 import { canvas_id as container } from '~/config/settings'
 import { KonvaGraphType } from '~/services'
-import { listenTransformerEvents } from '~/lib/konvaUse/transformer'
+import { attacheTransformer, createTransformer, listenTransformerEvents } from '~/lib/konvaUse/transformer'
 
 interface State {
   stage: Konva.Stage | null
   backLayer: Konva.Layer | null
   elementsLayer: Konva.Layer | null
+  tranformer: Konva.Transformer | null
   scale: number
   // 整体尺寸
   size: {
@@ -25,6 +26,7 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
   stage: null,
   backLayer: null,
   elementsLayer: null,
+  tranformer: null,
   scale: 1,
   size: {
     width: 900,
@@ -42,10 +44,11 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     const elementsLayer = new Konva.Layer()
     stage.add(backLayer)
     stage.add(elementsLayer)
-    set(() => ({ stage, backLayer, elementsLayer }))
+    set(() => ({ stage, backLayer, elementsLayer, tranformer: createTransformer() }))
+    get().elementsLayer!.add(get().tranformer!)
     get().calculateScale(outWidth, outHeight)
     // 加入onclick事件
-    listenTransformerEvents(get().stage!, get().elementsLayer!)
+    listenTransformerEvents(get().tranformer!, get().stage!)
   },
   addRect: () => {
     const rect = {
@@ -55,9 +58,13 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
       height: 300,
       fill: '#F57274',
       draggable: true,
-      id: `${uuidv4()} ${KonvaGraphType.Rect}`,
+      id: `${uuidv4()}=${KonvaGraphType.Rect}`,
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
+    // const tr = new Konva.Transformer()
+    // get().elementsLayer!.add(tr)
+    // tr.nodes([get().stage!.findOne(`#${rect.id}`)!])
+    attacheTransformer(get().tranformer!, get().stage!, get().elementsLayer!, rect.id)
   },
   calculateScale: (outWidth: number, outHeight: number) => {
     const { width, height } = get().size

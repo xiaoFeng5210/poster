@@ -1,13 +1,12 @@
 import Konva from 'konva'
 
-export const createTransformer = (layer: Konva.Layer): Konva.Transformer => {
+export const createTransformer = (): Konva.Transformer => {
   const tr = new Konva.Transformer()
-  layer.add(tr)
-  return tr
+  tr.setZIndex(9999)
+  return new Konva.Transformer()
 }
 
-export const listenTransformerEvents = (stage: Konva.Stage, layer: Konva.Layer) => {
-  const tr = createTransformer(layer)
+export const listenTransformerEvents = (tr: Konva.Transformer, stage: Konva.Stage) => {
   stage.on('click tap', (e) => {
     if (e.target === stage) {
       tr.nodes([])
@@ -20,11 +19,7 @@ export const listenTransformerEvents = (stage: Konva.Stage, layer: Konva.Layer) 
   })
 }
 
-export const useAttachTransformer = (stage: Konva.Stage, layer: Konva.Layer) => {
-  return (id: string) => {
-    if (stage.findOne(`#${id}`)) {
-      const tr = createTransformer(layer)
-      tr.attachTo(stage.findOne(`#${id}`))
-    }
-  }
+export const attacheTransformer = (tr: Konva.Transformer, stage: Konva.Stage, layer: Konva.Layer, id: string) => {
+  if (tr)
+    tr.nodes([stage.findOne(`#${id}`)])
 }

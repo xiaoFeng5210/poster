@@ -24,7 +24,7 @@ const AsideBar: FC = () => {
       {
         options.map((item, index) => {
           return (
-            <Trigger showArrow key={index}
+            <Trigger key={index}
               trigger='click'
               position='rt'
               popup={() => (<div className="w-220px h-auto p-10px bg-white">{components(item.key)}</div>)}
