@@ -3,6 +3,7 @@ import Konva from 'konva'
 import { v4 as uuidv4 } from 'uuid'
 import { canvas_id as container } from '~/config/settings'
 import { KonvaGraphType } from '~/services'
+import { createTransformer } from '~/lib/konvaUse/transformer'
 
 interface State {
   stage: Konva.Stage | null
@@ -19,6 +20,7 @@ interface Action {
   init: (width: number, height: number) => void
   calculateScale: (outWidth: number, outHeight: number) => void
   addRect: () => void
+  listenTransformerEvent: () => void
 }
 export const useKonvaStore = create<State & Action>((set, get) => ({
   stage: null,
@@ -44,18 +46,28 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     set(() => ({ stage, backLayer, elementsLayer }))
     get().calculateScale(outWidth, outHeight)
     // 加入onclick事件
-    // get().stage!.on('click tap', (e) => {
-    //   if (e.target === stage) {
-    //     get().stage!.find('Transformer').destroy()
-    //     get().elementsLayer!.draw()
-    //   }
-    //   get().stage!.find('Transformer').destroy()
-
-    //   const tr = new Konva.Transformer()
-    //   get().elementsLayer!.add(tr)
-    //   tr.attachTo(e.target)
-    //   get().elementsLayer!.draw()
-    // })
+    get().listenTransformerEvent()
+  },
+  attachTransformer: (id: string) => {
+    const stage = get().stage!
+    const layer = get().elementsLayer!
+    if (stage.findOne(`#${id}`)) {
+      const tr = createTransformer(stage, layer)
+      tr.attachTo(stage.findOne(`#${id}`))
+    }
+  },
+  listenTransformerEvent: () => {
+    const stage = get().stage!
+    const layer = get().elementsLayer!
+    stage.on('click tap', (e) => {
+      if (e.target === stage) {
+        stage.findOne('Transformer').destroy()
+        layer.draw()
+      }
+      const tr = createTransformer(stage, layer)
+      tr.attachTo(e.target)
+      layer.draw()
+    })
   },
   addRect: () => {
     const rect = {
@@ -65,7 +77,7 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
       height: 300,
       fill: '#F57274',
       draggable: true,
-      name: `${uuidv4()} ${KonvaGraphType.Rect}`,
+      id: `${uuidv4()} ${KonvaGraphType.Rect}`,
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
   },
