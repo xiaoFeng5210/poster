@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import Konva from 'konva'
 import { v4 as uuidv4 } from 'uuid'
-import { canvas_id as container } from '~/config/settings'
 import { KonvaGraphType } from '~/services'
 import { attacheTransformer, createTransformer, listenTransformerEvents } from '~/lib/konvaUse/transformer'
 
@@ -35,20 +34,7 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
   },
 
   init: (outWidth: number, outHeight: number) => {
-    const { width, height } = get().size
-    const stage = new Konva.Stage({
-      container,
-      width,
-      height,
-    })
-    const backLayer = new Konva.Layer()
-    const elementsLayer = new Konva.Layer()
-    stage.add(backLayer)
-    stage.add(elementsLayer)
-    set(() => ({ stage, backLayer, elementsLayer, tranformer: createTransformer() }))
-    get().calculateScale(outWidth, outHeight)
-    // 加入onclick事件
-    listenTransformerEvents(get().tranformer!, get().stage!)
+
   },
   initTransformer: () => {
     if (get().elementsLayer?.findOne('.Transformer')) {
