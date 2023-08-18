@@ -15,7 +15,6 @@ const DrawingBoard: FC = () => {
   const initKonva = useKonvaStore(state => state.init)
   const [scale, size] = useKonvaStore(state => [state.scale, state.size])
   const [canvasBoxStyles, setCanvasBoxStyles] = useState<BoxStyles | {}>({})
-
   const setOutBoxSize = ($box: HTMLElement) => {
     if ($box.clientWidth && $box.clientHeight) {
       const outWidth = $box.clientWidth

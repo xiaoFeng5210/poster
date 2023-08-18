@@ -61,9 +61,6 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
       id: `${uuidv4()}=${KonvaGraphType.Rect}`,
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
-    // const tr = new Konva.Transformer()
-    // get().elementsLayer!.add(tr)
-    // tr.nodes([get().stage!.findOne(`#${rect.id}`)!])
     attacheTransformer(get().tranformer!, get().stage!, get().elementsLayer!, rect.id)
   },
   calculateScale: (outWidth: number, outHeight: number) => {
