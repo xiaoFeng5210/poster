@@ -59,21 +59,4 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     attacheTransformer(get().tranformer!, get().stage!, get().elementsLayer!, rect.id)
     get().initTransformer()
   },
-  calculateScale: (outWidth: number, outHeight: number) => {
-    const { width, height } = get().size
-    let scale = 1
-    if (height > width) {
-      if (outHeight > height)
-        scale = 0.6
-      else
-        scale = outHeight / height * 0.8
-    }
-    else {
-      if (outWidth > width)
-        scale = 0.6
-      else
-        scale = outWidth / width * 0.8
-    }
-    set(() => ({ scale }))
-  },
 }))
