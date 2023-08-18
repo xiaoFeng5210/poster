@@ -21,6 +21,7 @@ interface Action {
   init: (width: number, height: number) => void
   calculateScale: (outWidth: number, outHeight: number) => void
   addRect: () => void
+  initTransformer: () => void
 }
 export const useKonvaStore = create<State & Action>((set, get) => ({
   stage: null,
@@ -45,10 +46,18 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     stage.add(backLayer)
     stage.add(elementsLayer)
     set(() => ({ stage, backLayer, elementsLayer, tranformer: createTransformer() }))
-    get().elementsLayer!.add(get().tranformer!)
     get().calculateScale(outWidth, outHeight)
     // 加入onclick事件
     listenTransformerEvents(get().tranformer!, get().stage!)
+  },
+  initTransformer: () => {
+    if (get().elementsLayer?.findOne('.Transformer')) {
+      get().elementsLayer?.findOne('.Transformer')?.destroy()
+      get().elementsLayer?.batchDraw()
+    }
+    else {
+      get().elementsLayer!.add(get().tranformer!)
+    }
   },
   addRect: () => {
     const rect = {
@@ -62,6 +71,7 @@ export const useKonvaStore = create<State & Action>((set, get) => ({
     }
     get().elementsLayer!.add(new Konva.Rect(rect))
     attacheTransformer(get().tranformer!, get().stage!, get().elementsLayer!, rect.id)
+    get().initTransformer()
   },
   calculateScale: (outWidth: number, outHeight: number) => {
     const { width, height } = get().size
